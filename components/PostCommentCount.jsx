@@ -1,22 +1,22 @@
-"use client"
+async function getComments(postId) {
+    const token = process.env.GOREST_TOKEN_CLIENT;
+    const res = await fetch(`https://gorest.co.in/public/v2/posts/${postId}/comments`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        cache: 'no-cache'
+    })
+    const comments = await res.json()
+  
+    return comments;
+  }
 
-import { useEffect, useState } from "react";
-
-const PostCommentCount = ({ postId }) => {
-    const [comment, setComment] = useState([]);
-
-    useEffect(() => {
-        const getPostComments = async () => {
-            const response = await fetch('https://gorest.co.in/public/v2/posts/' + postId + '/comments')
-            const data = await response.json();
-            setComment(data);
-        }
-
-        getPostComments();
-    }, []);
+const PostCommentCount = async ({ postId }) => {
+    const comments = await getComments(postId)
 
     return (
-        <div className="text-sm text-slate-500">{comment.length} Komentar</div>
+        <div className="text-sm text-slate-500">{comments.length} Komentar</div>
     )
 }
 
