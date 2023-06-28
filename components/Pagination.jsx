@@ -1,5 +1,6 @@
 "use client"
 
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 
 const Pagination = ({ maxPage, onPageChange }) => {
@@ -64,11 +65,11 @@ const Pagination = ({ maxPage, onPageChange }) => {
 
     return (
         <div className="flex justify-center my-5 gap-2">
-            <button onClick={onPrev} className="py-2 px-4 rounded-lg border bg-slate-100">Prev</button>
+            <button onClick={onPrev} className="w-10 h-10 flex items-center justify-center rounded-lg border bg-slate-100"><ChevronLeftIcon className="w-5 h-5"/></button>
             {generatePages().map((i) => (
-                <button key={i} onClick={() => onPageClick(i)} className={`${(i == page ? "bg-slate-700 text-white" : "bg-slate-100 border")} py-2 px-4 rounded-lg`}>{i}</button>
+                <button key={i} onClick={() => onPageClick(i)} className={`${(i == page ? "bg-slate-700 text-white" : "bg-slate-100 border")} w-10 h-10 flex items-center justify-center rounded-lg`}>{i}</button>
             ))}
-            <button onClick={onNext} className="py-2 px-4 rounded-lg border bg-slate-100">Next</button>
+            <button onClick={onNext} className="w-10 h-10 flex items-center justify-center rounded-lg border bg-slate-100"><ChevronRightIcon className="w-5 h-5"/></button>
         </div>
     )
 }
