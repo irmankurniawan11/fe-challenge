@@ -29,7 +29,7 @@ const UserEditPage = ({params}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await updateUser(params.id, formData)
+        await updateUser(params.id, formData, ()=>{router.push('/users');})
     }
 
     return (
