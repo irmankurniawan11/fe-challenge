@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Aplikasi ini merupakan implementasi Front-End CRUD dari public API [Go REST](https://gorest.co.in/) yang dibangun dengan [Next.js](https://nextjs.org/).
 
-## Getting Started
+### Fitur yang tersedia
+- Halaman blog (Daftar postingan)
+- Halaman detail postingan dengan komentar
+- Halaman daftar user (Create, Read, Update, Delete)
+- Pagination
 
-First, run the development server:
-
+## Cara Menjalankan Aplikasi
+---
+- Clone respository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/irmankurniawan11/fe-challenge.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Login ke [Go REST](https://gorest.co.in/) untuk mendapatkan **API Token**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Buat file `.env` di project root, isikan dengan
+```
+GOREST_TOKEN = e82xxxdaa2975xxxxxa1xxxxxbab7e8bbxxx2xx58
+```
+- Instal dependency
+```bash
+npm i
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Jalankan di browser
+```bash
+npm run dev
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat hasilnya.
