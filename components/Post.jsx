@@ -8,7 +8,7 @@ const Post = ({ postId, postUserId, postBody, postTitle }) => {
   return (
     <div className="flex flex-col justify-between max-w-lg bg-white gap-2 p-6 rounded-xl border border-slate-100">
       <div className="flex flex-col gap-2">
-        <PostUser id={postUserId} />
+        {/* <PostUser id={postUserId} /> */}
         <h1 className="font-bold text-lg">{postTitle}</h1>
         <p className="text-sm">{postBody.slice(0, 100)}...</p>
       </div>

@@ -1,46 +1,9 @@
 "use client"
 
 import Pagination from "@components/Pagination";
+import { deleteUser, getUserList } from "@lib/api";
 import Link from "next/link";
 import { useEffect, useState } from "react"
-
-const getUserList = async ( page ) => {
-    const token = process.env.GOREST_TOKEN_CLIENT;
-    const res = await fetch(`https://gorest.co.in/public/v2/users?page=${page}&per_page=10`, {
-        cache: 'no-store',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    const users = await res.json();
-    return users;
-}
-
-async function deleteUser(id, callback=null) {
-    try {
-        const token = process.env.GOREST_TOKEN_CLIENT;
-        const response = await fetch(`https://gorest.co.in/public/v2/users/${id}`, {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            cache: 'no-store'
-        })
-
-        if(response.status == 204) {
-            const message = "Data berhasil dihapus"
-            console.log(message)
-            if(callback) callback()
-        }
-        else {
-            console.log('Failed to delete user:', response.status)
-        }
-    } catch (error) {
-        console.log('Error: ', error)
-    }
-}
 
 const UserPage = () => {
     const [users, setUsers] = useState([]);

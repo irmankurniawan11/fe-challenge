@@ -1,5 +1,6 @@
 "use client"
 
+import { getUser, updateUser } from "@lib/api";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
@@ -28,55 +29,7 @@ const UserEditPage = ({params}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await processUpdate(formData)
-    }
-
-    async function getUser(id) {
-        try {
-            const token = process.env.GOREST_TOKEN_CLIENT;
-            const response = await fetch(`https://gorest.co.in/public/v2/users/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                cache: 'no-store'
-            })
-
-            if(response.ok) {
-                const user = await response.json();
-                return user;
-            }
-            else {
-                console.log('Failed to get user:', response.status)
-            }
-        } catch (error) {
-            console.log('Error: ', error)
-        }
-    }
-
-    async function processUpdate(data) {
-        try {
-            const token = process.env.GOREST_TOKEN_CLIENT;
-            const response = await fetch(`https://gorest.co.in/public/v2/users/${params.id}`, {
-                method: 'PATCH',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-
-            if(response.ok) {
-                const updatedUser = await response.json();
-                console.log('User updated:', updatedUser)
-                router.push('/users');                
-            }
-            else {
-                console.log('Failed to update user:', response.status)
-            }
-        } catch (error) {
-            console.log('Error: ', error)
-        }
+        await updateUser(params.id, formData)
     }
 
     return (

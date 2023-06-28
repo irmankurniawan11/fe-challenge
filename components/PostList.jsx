@@ -1,30 +1,31 @@
+"use client"
+
+import { getPostList } from "@lib/api";
 import Post from "./Post"
-
-async function getPosts() {
-    const token = process.env.GOREST_TOKEN_CLIENT;
-    const res = await fetch(`https://gorest.co.in/public/v2/posts`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        cache: 'no-cache'
-    })
-    const posts = await res.json()
-
-    return posts;
-}
-
-
+import Pagination from "./Pagination";
+import { useEffect, useState } from "react";
 
 const PostList = async () => {
-    const posts = await getPosts();
+    const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
+
+    useEffect(()=>{
+        getPostList(page).then((result)=>setPosts(result))
+    }, [page])
+
+    function handlePageChange(page) {
+        setPage(page);
+    }
 
     return (
+        <>
+        <Pagination maxPage={10} onPageChange={(page)=>handlePageChange(page)}/>
         <div className="flex gap-2 flex-wrap justify-center">
             {posts.map((post) => (
                 <Post key={post.id} postId={post.id} postUserId={post.user_id} postTitle={post.title} postBody={post.body}/>
             ))}
         </div>
+        </>
     )
 }
 
